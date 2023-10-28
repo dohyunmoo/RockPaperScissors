@@ -7,26 +7,30 @@ class Rock:
         self.radius = radius
         self.x_speed = x_speed
         self.y_speed = y_speed
-        self.collision_type = collision_type
         self.attribute = attribute
 
         self.moment = pymunk.moment_for_circle(1, 0, radius)
         self.body = pymunk.Body(1, self.moment)
         self.body.position = x, y
         self.body.velocity = x_speed, y_speed
+
         self.shape = pymunk.Circle(self.body, radius)
         self.shape.density = 1
         self.shape.elasticity = 1
-        self.shape.friction = 0.7
+        self.shape.friction = 0
+        self.shape.collision_type = collision_type
         space.add(self.body, self.shape)
 
     def draw_object(self, screen):
         if self.attribute == "r":
-            pygame.draw.circle(screen, pygame.Color("#FF0000"), self.body.position, self.radius)
+            # pygame.draw.circle(screen, pygame.Color("#FF0000"), self.body.position, self.radius)
+            self.shape.color = (255, 0, 0, 100)
         elif self.attribute == "p":
-            pygame.draw.circle(screen, pygame.Color("#00FF00"), self.body.position, self.radius)
+            # pygame.draw.circle(screen, pygame.Color("#00FF00"), self.body.position, self.radius)
+            self.shape.color = (255, 255, 0, 100)
         elif self.attribute == "s":
-            pygame.draw.circle(screen, pygame.Color("#0000FF"), self.body.position, self.radius)
+            # pygame.draw.circle(screen, pygame.Color("#0000FF"), self.body.position, self.radius)
+            self.shape.color = (0, 0, 255, 100)
     
     def obj_contact(self):
         pass
